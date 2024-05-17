@@ -19,7 +19,9 @@ app.get('/sse', (req, res) => {
   // Send SSE data every second
   const infos =
     '平生不会相思，才会相思，便害相思。身似浮云，心如飞絮，气若游丝。空一缕余香在此，盼千金游子何之。证侯来时，正是何时？灯半昏时，月半明时。';
-  const wrods = infos.split('');
+  const mdString =
+    '```html\n<p>22</p>\n; <span>aaa</span> \n```; <h1>2233</h1>;## 222;**Bold text**;- 1.22;- 2.33;';
+  const wrods = mdString.split(';');
   let index = 0;
   const sendData = () => {
     if (index < wrods.length) {
@@ -33,7 +35,7 @@ app.get('/sse', (req, res) => {
       clearInterval(intervalId);
     }
   };
-  const intervalId = setInterval(sendData, 100);
+  const intervalId = setInterval(sendData, 2000);
   res.on('close', () => {
     console.log('>>> close >>>', new Date().toISOString());
     clearInterval(intervalId);
